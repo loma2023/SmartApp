@@ -1,0 +1,174 @@
+<%- include('partials/Header.ejs'); -%>
+  <%- include('partials/Sidebar.ejs'); -%>
+
+    <div class="Container-Receipt">
+
+
+      <div class="Receipt-Right">
+        <div class="PopUp-header">
+          <h3><%= Title %>  جديدة</h3>
+        </div>
+
+        <div class="DataReceipt">
+          <div class="input-box">
+            <input type="text" class="Receipt-Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+            <label>تاريخ الفاتورة </label>
+          </div>
+          <div class="input-box">
+            <select class="Receipt-Type">
+              <option value="empty" selected disabled >نوع الفاتورة</option>
+              <% if (Title.includes("مشتريات")) { %>
+                <option value="مشتريات">مشتريات</option>
+                <option value="مرتجع مشتريات "> مرتجع مشتريات </option>                 
+              <% } %>
+              <% if (Title.includes("مبيعات")) { %>
+                <option value="مبيعات">مبيعات</option>
+                <option value="مرتجع مبيعات "> مرتجع مبيعات </option>                
+              <% } %>
+            </select>
+            <label>نوع الفاتورة </label>
+          </div>
+          <div class="input-box">
+            <select class="Name-Person">
+              <% let Datas=MyData.DataCustomers ; let Name = "اسم العميل"%>
+              <% if (Title.includes("مشتريات")) { %>
+                <% Datas=MyData.DataSuppliers ;Name = "اسم المورد" %>
+              <% } %>
+              <option value="empty" selected disabled ><%= Name %></option>
+              <% Datas.forEach(Person=> { %>
+                <option value="<%= Person._id %>">
+                  <%= Person.Name %>
+                </option>
+                <% }) %>
+            </select>
+            <label><%= Name %></label>
+          </div>
+        </div>
+
+        <div class="Table-Container">
+          <table class="Table">
+            <thead>
+              <tr>
+                <th>QR-Code</th>
+                <th>الصنف</th>
+                <th>الوحده</th>
+                <th>العدد</th>
+                <th>السعر</th>
+                <th>الاجمالي</th>
+                <th>اجراء</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr>
+                <td>
+                  <input type="text" class="QRCODE" id="Name-Product" placeholder="QR-CODE" onchange="QRRead(event)">
+                </td>
+                <td>
+                  <select id="Name-Product" class="Name-Product" onchange="GetPriceItem(event)">
+                    <option value="empty" selected disabled>الصنف</option>
+                    <% MyData.DataProducts.forEach(Product=> { %>
+                      <option value="<%= Product._id %>">
+                        <%= Product.NameProduct %>
+                      </option>
+                      <% }) %>
+                    </select>
+                </td>
+                <td>
+                  <select id="Units-Item" class="Units-Item" onchange="GetPriceItem(event)">
+                    <option value="empty" selected disabled>الوحده</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" onkeyup="TotalItem(event)" class="Quantity-Item" value="0">
+                </td>
+                <td>
+                  <input type="text" disabled class="Price-Item" value="0">
+                </td>
+                <td>
+                  <input type="text" disabled class="Total-Item" value="0">
+                </td>
+                <td>
+                  <button type="button" class="btn Tbtn btn-Delete" onclick="Alert(id)">
+                    <i class="bx bxs-trash"></i></button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="Receipt-Left">
+
+        <div class="Cart">
+          <div class="Flex-Div">
+            <h4>رقم الفاتورة:</h4>
+            <h4 class="NuReceipt">
+              <%= MyData.DataReceipts.length + 1 %>
+            </h4>
+          </div>
+        </div>
+
+        <div class="Cart">
+          <div class="Grid-Div ">
+            <h4>نوع الدفع :</h4>
+            <select class="Type-Amount">
+              <option value="empty" selected disabled>نوع الدفع</option>
+              <option value="cash">cash</option>
+              <option value="card">card</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="Cart">
+          <div>
+            <div class="Flex-Div">
+              <h4>اجمالى الاصناف :</h4>
+              <h4 class="SubTotal">0.00</h4>
+            </div>
+            <div class="Flex-Div">
+              <h4>ضريبة القيمة المضافة :</h4>
+              <h4 class="Tax">0.00</h4>
+            </div>
+
+            <!-- <div class="Flex-Div">
+              <h4>تكلفة التوصيل :</h4>
+              <h4 class="Tax">0.00</h4>
+            </div> -->
+
+          </div>
+
+          <div class="Grid-Div Discount-Div">
+            <h4> الخصم :</h4>
+            <input type="text" class="Discount" placeholder="الخصم" onkeyup="TotalReceipt()">
+          </div>
+
+          <div class="Flex-Div Div-Total">
+            <h2>اجمالى الفاتورة :</h2>
+            <h2 class="Total-Receipt">0.00</h2>
+          </div>
+
+          <div class="Flex-Div" style="display: none;">
+            <div class="input-box">
+              <input type="text" class="Amount-Paid" placeholder="المبلغ المدفوع">
+            </div>
+          </div>
+
+          <div class="Flex-Div">
+            <button type="button" onclick="CRUD_Redeipts()" class="btn btn-plus">Save</button>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <script src="Js/Receipts.js"></script>
+
+
+
+    <%- include('partials/Alert.ejs'); -%>
+      <%- include('partials/Footer.ejs'); -%>

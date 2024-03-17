@@ -1,0 +1,201 @@
+<body>
+    <div class="sidebar">
+        <span class="Toggle bx bx-x"></span>
+        <div class="logo_details">
+            <img src="Img/logo.jpg" alt="">
+            <div class="logo_name">Smart App</div>
+        </div>
+        <ul class="nav-list">
+
+            <li>
+                <a href="/">
+                    <i class='bx bxs-home'></i>
+                    <span class="link_name">لوحة التحكم</span>
+                </a>
+                <span class="tooltip">لوحة التحكم</span>
+            </li>
+
+            <li>
+                <a>
+                    <i class="bx bx-user"></i>
+                    <span class="link_name">العملاء</span>
+                    <i class="arrow bx bx-chevron-down"></i>
+                </a>
+                <span class="tooltip">العملاء</span>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="DataCustomers">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">بيانات العملاء</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">كشف حساب العملاء</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">مدفوعات العملاء</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a>
+                    <i class="bx bx-user"></i>
+                    <span class="link_name">الموردين</span>
+                    <i class="arrow bx bx-chevron-down"></i>
+                </a>
+                <span class="tooltip">الموردين</span>
+
+                <ul class="sub-menu">
+                    <li>
+                        <a href="DataSuppliers">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">بيانات الموردين</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">كشف حساب الموردين</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">مدفوعات الموردين</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a>
+                    <i class="bx bx-store-alt"></i>
+                    <span class="link_name">المنتجات</span>
+                    <i class="arrow bx bx-chevron-down"></i>
+                </a>
+                <span class="tooltip">المنتجات</span>
+
+                <ul class="sub-menu">
+                    <li>
+                        <a href="DataProducts">
+                            <i class="bx bx-store-alt"></i>
+                            <span class="link_name">بيانات المنتجات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-store-alt"></i>
+                            <span class="link_name">كشف حركة المنتجات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-store-alt"></i>
+                            <span class="link_name">النواقص</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-store-alt"></i>
+                            <span class="link_name">التالف</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a>
+                    <i class="bx bx-receipt"></i>
+                    <span class="link_name">الفواتير</span>
+                    <i class="arrow bx bx-chevron-down"></i>
+                </a>
+                <span class="tooltip">الفواتير</span>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="NewReceipts-Purchases">
+                            <i class="bx bx-receipt"></i>
+                            <span class="link_name">فاتورة مشتريات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="NewReceipts-Sales">
+                            <i class="bx bx-receipt"></i>
+                            <span class="link_name">فاتورة مبيعات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="bx bx-grid-alt"></i>
+                    <span class="link_name">Dashboard</span>
+                    <i class="arrow bx bx-chevron-down"></i>
+
+                </a>
+                <span class="tooltip">Dashboard</span>
+
+                <ul class="sub-menu">
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="bx bx-cart-alt"></i>
+                    <span class="link_name">Order</span>
+                </a>
+                <span class="tooltip">Order</span>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="bx bx-cog"></i>
+                    <span class="link_name">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+
+        </ul>
+
+        <li class="profile">
+            <div class="profile_details">
+                <img src="Img/avatar.svg" alt="profile image">
+                <div class="profile_content">
+                    <h1 class="name"><%=  User.Username %></h1>
+                    <h2 class="designation">Admin</h2>
+                </div>
+            </div>
+            <i onclick="LogOut()" class="bx bx-log-out" id="log_out"></i>
+        </li>
+    </div>
+
+    <section class="main">
+
+        <header class="header">
+            <i class="Toggle bx bx-menu"></i>
+            <div>
+                <i class="FullScreen bx bx-fullscreen" onclick="ToggleFullScreen()"></i>
+                <img src="Img/avatar.svg" alt="">
+            </div>
+        </header>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="Css/Login.css">
+    <title>
+        <%= Title %>
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/Alert.ejs'); -%>
+        <div class="Container-Form">
+            <form class="Login-Form">
+                <h2 class="Title">Entry OPT</h2>
+                <div class="DivCodeTxt">
+                    <div class="inputbox">
+                        <input class="CodeTxt" type="text" required>
+                        <input class="CodeTxt" type="text" disabled>
+                        <input class="CodeTxt" type="text" disabled>
+                        <input class="CodeTxt" type="text" disabled>
+                        <input class="CodeTxt" type="text" disabled>
+                        <input class="CodeTxt" type="text" disabled>
+                    </div>
+                </div>
+                <button type="button" id="<%= Title %>" onclick="MyFunction(id)" class="btn btn-Save btn-OTP"> Verify
+                </button>
+                <div class="register">
+                    <p>have an account ? <a href="/Login"> Login</a></p>
+                </div>
+            </form>
+        </div>
+
+
+        <script>
+            let Btn = document.querySelector(".btn-OTP")
+            let CodeTxts = document.querySelectorAll(".CodeTxt")
+            CodeTxts[0].focus();
+            CodeTxts.forEach((input) => {
+                input.addEventListener("input", () => {
+                    let currentInput = input
+                    let nextInput = currentInput.nextElementSibling
+
+                    if (currentInput.value.length > 1 && currentInput.value.length === 2) {
+                        currentInput.value = currentInput.value[1]
+                    }
+
+                    if (nextInput !== null && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
+                        nextInput.removeAttribute("disabled")
+                        nextInput.focus()
+                    }
+
+                    if (!CodeTxts[5].disabled && CodeTxts[5].value !== "") {
+                        Btn.classList.add("active")
+                        Btn.focus()
+                    } else {
+                        Btn.classList.remove("active")
+                    }
+
+                })
+
+                input.addEventListener("keyup", (e) => {
+                    if (e.key == "Backspace") {
+                        if (input.previousElementSibling != null) {
+                            e.target.value = ""
+                            e.target.setAttribute("disabled", true)
+                            input.previousElementSibling.focus()
+                        }
+                    }
+                })
+
+
+            });
+        </script>
+
+        <script src="Js/Auth.js"></script>
+        <%- include('../partials/Footer.ejs'); -%>

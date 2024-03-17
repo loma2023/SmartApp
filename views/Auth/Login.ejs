@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="Css/Login.css">
+    <title>
+        <%= Title %>
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/Alert.ejs'); -%>
+        <div class="Container-Form">
+            <form class="Login-Form">
+                <h2 class="Title">Login</h2>
+
+                <div class="inputbox">
+                    <i class='bx bx-envelope'></i>
+                    <input class="Email" type="email" required>
+                    <label>Email</label>
+                </div>
+
+                <div class="inputbox">
+                    <i class='bx bx-lock-alt'></i>
+                    <input class="Password" type="password" required>
+                    <label>Password</label>
+                </div>
+
+                <!-- <div class="forget">
+                    <label><input type="checkbox">Remember Me</label>
+                    <a href="/ForgotPassword">Forgot Password</a>
+                </div> -->
+                <button type="button" onclick="Login(event)" class="btn btn-Save">Log In</button>
+
+                <div class="register">
+                    <p>Don't have an account ? <a href="/Register"> Register</a></p>
+                    <p><a href="/ForgotPassword">Forgot Password</a></p>
+
+                </div>
+            </form>
+        </div>
+
+        <script src="Js/Auth.js"></script>
+        
+        <%- include('../partials/Footer.ejs'); -%>

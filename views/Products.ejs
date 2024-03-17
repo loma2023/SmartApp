@@ -1,0 +1,187 @@
+<%- include('partials/Header.ejs'); -%>
+    <%- include('partials/Sidebar.ejs'); -%>
+
+        <div class="PopUp-Container ContainerForm">
+            <form class="Form MyForm">
+                <div class="PopUp-header">
+                    <h3>اضافة منتج جديد</h3>
+                    <i onclick="Hide_Container()" class="bx bx-x X-Toast"></i>
+                </div>
+                <div class="PopUp-body">
+                    <div class="input-box">
+                        <input type="text" class="NameProduct" name="NameProduct" id="NameProduct" required>
+                        <label for="NameProduct">اسم المنتج *</label>
+                    </div>
+                    <div class="Row Row-3">
+                        <div class="input-box">
+                            <input type="text" class="MinQty" name="MinQty" id="MinQty" required>
+                            <label for="MinQty">مستوي اعادة الطلب</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="MaxQty" name="MaxQty" id="MaxQty" required>
+                            <label for="MaxQty">الحد الاقصي للتخزين</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="QRCODE" name="QRCODE" id="QRCODE" required>
+                            <label for="QRCODE">QR-Code</label>
+                        </div>
+                    </div>
+                    <div class="Row Row-4 Row-Units">
+                        <div class="input-box">
+                            <input type="text" class="NameUnit" name="NameUnit" id="NameUnit" required>
+                            <label for="NameUnit">الوحده </label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="QtyUnit" name="QtyUnit" id="QtyUnit" required>
+                            <label for="QtyUnit">محتوي الوحده</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="PriceUnitBuy" name="PriceUnitBuy" id="PriceUnitBuy" required>
+                            <label for="PriceUnitBuy">سعر الشراء</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="PriceUnitSales" name="PriceUnitSales" id="PriceUnitSales"
+                                required>
+                            <label for="PriceUnitSales">سعر البيع</label>
+                        </div>
+                    </div>
+                    <div class="Row Row-4 Row-Units">
+                        <div class="input-box">
+                            <input type="text" class="NameUnit" name="NameUnit" id="NameUnit" required>
+                            <label for="NameUnit">الوحده </label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="QtyUnit" name="QtyUnit" id="QtyUnit" required>
+                            <label for="QtyUnit">محتوي الوحده</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="PriceUnitBuy" name="PriceUnitBuy" id="PriceUnitBuy" required>
+                            <label for="PriceUnitBuy">سعر الشراء</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="PriceUnitSales" name="PriceUnitSales" id="PriceUnitSales"
+                                required>
+                            <label for="PriceUnitSales">سعر البيع</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="PopUp-footer">
+                    <button type="button" onclick="CRUD_Data(event)" id="Save" class="btn btn-joint btn-Save">Save
+                        Data</button>
+                    <button type="button" onclick="Hide_Container()" class="btn btn-Cansel">Cansel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="Container-Table">
+
+            <div class="header-Container">
+                <div class="right">
+                    <h1>
+                        <%= Title %>
+                    </h1>
+                    <p>لادارة كل <%= Title %>
+                    </p>
+                </div>
+                <div class="left">
+                    <button type="button" onclick="Show_Search()" class="btn btn-search"><i
+                            class="bx bx-search"></i></button>
+                    <button type="button" onclick="ContainerForm()" class="btn btn-plus"><i
+                            class="bx bx-plus"></i></button>
+                    <button type="button" onclick="ExcelFile()" class="btn Tbtn btn-excel"><i
+                            class="bx bxs-file-doc"></i></button>
+                    <button type="button" onclick="DoPrint()" class="btn Tbtn btn-print"><i
+                            class="bx bx-printer"></i></button>
+                </div>
+            </div>
+
+            <div class="Search-Container">
+                <div class="input-box">
+                    <input type="search" class="NameSearch" onkeyup="Search()" required>
+                    <label>الاسم </label>
+                    <i class="bx bx-search"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="SDate" onkeyup="Search()" onfocus="(this.type='date')"
+                        onblur="(this.type='text')" required>
+                    <label>من تاريخ</label>
+                    <i class="bx bx-search"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="EDate" onkeyup="Search()" onfocus="(this.type='date')"
+                        onblur="(this.type='text')" required>
+                    <label>الي تاريخ</label>
+                    <i class="bx bx-search"></i>
+                </div>
+            </div>
+
+            <div class="Table-Container">
+                <table class="Table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم المنتج</th>
+                            <th>مستوى اعادة الطلب</th>
+                            <th>الحد الاقصي للتخزين</th>
+                            <th>QR-Code</th>
+                            <th>الوحده الرئيسية</th>
+                            <th>المدخل</th>
+                            <th>الاجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        <% MyData.DataProducts.forEach((Data, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= Data.NameProduct %>
+                                </td>
+                                <td>
+                                    <%= Data.MinQty %>
+                                </td>
+                                <td>
+                                    <%= Data.MaxQty %>
+                                </td>
+                                <td>
+                                    <%= Data.QRCODE %>
+                                </td>
+                                <td>
+                                    <%= Data.Units[0].NameUnit %>
+                                </td>
+
+                                <td>
+                                    <% if (Data.createdBy==MyData._id) { %>
+                                        <%= MyData.Username %>
+                                            <% } else { %>
+                                                <% MyData.DataUsers.forEach(Item=> { %>
+                                                    <% if (Data.createdBy==Item._id) { %>
+                                                        <%= Item.Username %>
+                                                            <% } %>
+                                                                <% }) %>
+                                                                    <% } %>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn Tbtn btn-Eye" id="<%= Data._id %>"><i
+                                            class="bx bx-show"></i></button>
+                                    <button type="button" class="btn Tbtn btn-Edit" id="<%= Data._id %>"
+                                        onclick="EditData(event)"><i class="bx bxs-pencil"></i></button>
+                                    <button type="button" class="btn Tbtn btn-Delete" id="<%= Data._id %>"
+                                        onclick="Alert(id)"><i class="bx bxs-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <% }) %>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <script src="Js/Products.js"></script>
+        <%- include('partials/Alert.ejs'); -%>
+            <%- include('partials/Footer.ejs'); -%>

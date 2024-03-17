@@ -1,0 +1,158 @@
+<%- include('partials/Header.ejs'); -%>
+    <%- include('partials/Sidebar.ejs'); -%>
+        <div class="PopUp-Container ContainerForm">
+            <form class="Form MyForm">
+                <div class="PopUp-header">
+                    <h3 class="AddCustomerSupplier">اضافة عميل جديد</h3>
+                    <i onclick="Hide_Container()" class="bx bx-x X-Toast"></i>
+                </div>
+
+                <div class="PopUp-body">
+                    <div class="input-box">
+                        <input type="text" class="Name" name="Name" id="Name" required>
+                        <label for="Name">الاسم *</label>
+                    </div>
+                    <div class="Row">
+                        <div class="input-box">
+                            <input type="text" class="City" name="City" id="City" required>
+                            <label for="City">المدينه</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" class="Address" name="Address" id="Address" required>
+                            <label for="Address">العنوان تفصيلي</label>
+                        </div>
+                    </div>
+                    <div class="Row">
+                        <div class="input-box">
+                            <input type="text" class="Phone" name="Phone" id="Phone" required>
+                            <label for="Phone">الهاتف </label>
+                        </div>
+
+                        <div class="input-box">
+                            <input type="text" class="Balance" name="Balance" id="Balance" required>
+                            <label for="Balance">الرصيد</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="PopUp-footer">
+                    <button type="button" onclick="CRUD_Data(event)" id="Save" class="btn btn-joint btn-Save">Save
+                        Data</button>
+                    <button type="button" onclick="Hide_Container()" class="btn btn-Cansel">Cansel</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="Container-Table">
+
+            <div class="header-Container">
+                <div class="right">
+                    <h1>
+                        <%= Title %>
+                    </h1>
+                    <p>لادارة كل <%= Title %>
+                    </p>
+                </div>
+                <div class="left">
+                    <button type="button" onclick="Show_Search()" class="btn btn-search"><i
+                            class="bx bx-search"></i></button>
+                    <button type="button" onclick="ContainerForm()" class="btn btn-plus"><i
+                            class="bx bx-plus"></i></button>
+                    <button type="button" onclick="ExcelFile()" class="btn Tbtn btn-excel"><i
+                            class="bx bxs-file-doc"></i></button>
+                    <button type="button" onclick="DoPrint()" class="btn Tbtn btn-print"><i
+                            class="bx bx-printer"></i></button>
+                </div>
+            </div>
+
+            <div class="Search-Container">
+                <div class="input-box">
+                    <input type="search" class="NameSearch" onkeyup="Search()" required>
+                    <label>الاسم </label>
+                    <i class="bx bx-search"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="SDate" onkeyup="Search()" onfocus="(this.type='date')"
+                        onblur="(this.type='text')" required>
+                    <label>من تاريخ</label>
+                    <i class="bx bx-search"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="EDate" onkeyup="Search()" onfocus="(this.type='date')"
+                        onblur="(this.type='text')" required>
+                    <label>الي تاريخ</label>
+                    <i class="bx bx-search"></i>
+                </div>
+            </div>
+
+            <div class="Table-Container">
+                <table class="Table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>المدينه</th>
+                            <th>العنوان</th>
+                            <th>الهاتف</th>
+                            <th>الرصيد الحالي</th>
+                            <th>المدخل</th>
+                            <th>الاجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        <% let Datas=MyData.DataCustomers %>
+                            <% if (Title.includes("الموردين")) { %>
+                                <% Datas=MyData.DataSuppliers %>
+                                    <% } %>
+                                        <% Datas.forEach((Data, index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= index + 1 %>
+                                                </td>
+                                                <td>
+                                                    <%= Data.Name %>
+                                                </td>
+                                                <td>
+                                                    <%= Data.City %>
+                                                </td>
+                                                <td>
+                                                    <%= Data.Address %>
+                                                </td>
+                                                <td>
+                                                    <%= Data.Phone %>
+                                                </td>
+                                                <td>
+                                                    <%= Data.Balance %>
+                                                </td>
+                                                <td>
+                                                    <% if (Data.createdBy==MyData._id) { %>
+                                                        <%= MyData.Username %>
+                                                            <% } else { %>
+                                                                <% MyData.DataUsers.forEach(Item=> { %>
+                                                                    <% if (Data.createdBy==Item._id) { %>
+                                                                        <%= Item.Username %>
+                                                                            <% } %>
+                                                                                <% }) %>
+                                                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn Tbtn btn-Eye"
+                                                        id="<%= Data._id %>"><i class="bx bx-show"></i></button>
+                                                    <button type="button" class="btn Tbtn btn-Edit" id="<%= Data._id %>"
+                                                        onclick="EditData(event)"><i class="bx bxs-pencil"></i></button>
+                                                    <button type="button" class="btn Tbtn btn-Delete"
+                                                        id="<%= Data._id %>" onclick="Alert(id)"><i
+                                                            class="bx bxs-trash"></i></button>
+                                                </td>
+                                            </tr>
+
+                                            <% }) %>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <script src="Js/CustomersSuppliers.js"></script>
+        <%- include('partials/Alert.ejs'); -%>
+            <%- include('partials/Footer.ejs'); -%>
